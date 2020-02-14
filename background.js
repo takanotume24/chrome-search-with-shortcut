@@ -1,30 +1,17 @@
-/* The function that finds and returns the selected text */
-const funcToInject = function () {
-    const selection = window.getSelection();
-    return (selection.rangeCount > 0) ? selection.toString() : '';
-};
-
-/* This line converts the above function to string
- * (and makes sure it will be called instantly) */
-const jsCodeStr = ';(' + funcToInject + ')();';
-
 chrome.commands.onCommand.addListener(function (cmd) {
     switch (cmd) {
         case "selected_text":
-            chrome.tabs.executeScript({
-                code: jsCodeStr,
-                allFrames: true   //  <-- inject into all frames, as the selection 
-            }, function (selected_text_per_frame) {
-                console.log(selected_text_per_frame)
-                if (!selected_text_per_frame.length[0]) {
-                    console.log("nothing selected.");
-                    return -1;
-                };
-                if (typeof (selected_text_per_frame[0]) !== "string") { return -1 };
-                if (chrome.runtime.lastError) {
-                    console.log('ERROR:\n' + chrome.runtime.lastError.message);
-                }
-                search(selected_text_per_frame[0])
+            var querry_info = {
+                active: true,
+                windowId: chrome.windows.WINDOW_ID_CURRENT
+            };
+
+            chrome.tabs.query(querry_info, function (result) {
+                var current_tab = result.shift();
+                var message = {};
+                chrome.tabs.sendMessage(current_tab.id, message, function (response) {
+                    search(response.selection_text);
+                });
 
             });
             break;
@@ -42,7 +29,29 @@ function onRequest(info, tab) {
 };
 
 function search(query) {
-    const serviceCall = 'http://www.google.com/search?q=' + query;
-    chrome.tabs.create({ url: serviceCall });
+    let options = {
+        engine: "mnrate"
+    };
+    (async () => {
+        const result = await browser.storage.sync.get(options)
+        const site_name = await result.engine
+        const site_url = select_url(site_name) + query;
+        chrome.tabs.create({ url: site_url });
+    })()
+}
+
+function select_url(site_name) {
+    switch (site_name) {
+        case "mnrate":
+            return "https://mnrate.com/search?i=All&kwd="
+        case "amazon":
+            return "https://www.amazon.co.jp/s?k="
+        case "mercari":
+            return "https://www.mercari.com/jp/search/?keyword="
+        case "rakuma":
+            return "https://fril.jp/search/"
+        case "yahuoku":
+            return "https://auctions.yahoo.co.jp/search/search?auccat=&tab_ex=commerce&ei=utf-8&aq=-1&oq=&sc_i=&fr=auc_top&p="
+    }
 }
 

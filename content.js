@@ -1,4 +1,5 @@
-(function () {
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     const selection = window.getSelection();
-    return selection.toString()
-})
+    sendResponse({ selection_text: selection.toString() });
+    return true;
+});
