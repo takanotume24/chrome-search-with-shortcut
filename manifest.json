@@ -1,0 +1,56 @@
+{
+    "name": "search by selection text",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "search by selection text on keyboard shortcut",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "https://*/*",
+        "contextMenus"
+    ],
+    "commands": {
+        "selected_text": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+S",
+                "mac": "Command+Shift+S"
+            },
+            "description": "Toggle feature foo"
+        },
+        "_execute_browser_action": {
+            "suggested_key": {
+                "windows": "Ctrl+Shift+S",
+                "mac": "Command+Shift+S",
+                "chromeos": "Ctrl+Shift+U",
+                "linux": "Ctrl+Shift+J"
+            }
+        },
+        "_execute_page_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+E",
+                "windows": "Alt+Shift+P",
+                "mac": "Alt+Shift+P"
+            }
+        }
+    }
+}
