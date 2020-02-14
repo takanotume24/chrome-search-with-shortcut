@@ -1,0 +1,14 @@
+{
+  "name": "search-shortcut",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:takanotume24/chrome-search-with-shortcut.git",
+  "author": "takanotume24 <takanotume24@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1",
+    "webextension-polyfill": "^0.6.0"
+  }
+}
