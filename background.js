@@ -29,7 +29,29 @@ function onRequest(info, tab) {
 };
 
 function search(query) {
-    const serviceCall = 'http://www.google.com/search?q=' + query;
-    chrome.tabs.create({ url: serviceCall });
+    let options = {
+        engine: "mnrate"
+    };
+    (async () => {
+        const result = await browser.storage.sync.get(options)
+        const site_name = await result.engine
+        const site_url = select_url(site_name) + query;
+        chrome.tabs.create({ url: site_url });
+    })()
+}
+
+function select_url(site_name) {
+    switch (site_name) {
+        case "mnrate":
+            return "https://mnrate.com/search?i=All&kwd="
+        case "amazon":
+            return "https://www.amazon.co.jp/s?k="
+        case "mercari":
+            return "https://www.mercari.com/jp/search/?keyword="
+        case "rakuma":
+            return "https://fril.jp/search/"
+        case "yahuoku":
+            return "https://auctions.yahoo.co.jp/search/search?auccat=&tab_ex=commerce&ei=utf-8&aq=-1&oq=&sc_i=&fr=auc_top&p="
+    }
 }
 
