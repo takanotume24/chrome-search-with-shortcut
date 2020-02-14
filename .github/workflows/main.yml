@@ -1,0 +1,22 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v0.1.0
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+    
