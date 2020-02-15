@@ -31,35 +31,22 @@ function onRequest(info, tab) {
 
 function search(query) {
     (async () => {
-        const result = await browser.storage.sync.get()
-        const site_name = await result.selected_site
-        const site = await get_url(result, site_name)
+        const result = await browser.storage.local.get()
+        const display_name = await result.selected_site
+        const site = await get_url(result, display_name)
         console.log(site)
         const site_url = site.url + query;
         chrome.tabs.create({ url: site_url });
     })();
 }
 
-function get_url(json, site_name) {
+function get_url(json, display_name) {
     console.log(json)
     const match_data = json["engines"].filter(function (item, index) {
-        console.log(item.site_name)
-        if (item.site_name == site_name) return true
+        console.log(item.display_name)
+        if (item.display_name == display_name) return true
     })
     return match_data[0]
 }
-function select_url(site_name) {
-    switch (site_name) {
-        case "mnrate":
-            return "https://mnrate.com/search?i=All&kwd="
-        case "amazon":
-            return "https://www.amazon.co.jp/s?k="
-        case "mercari":
-            return "https://www.mercari.com/jp/search/?keyword="
-        case "rakuma":
-            return "https://fril.jp/search/"
-        case "yahuoku":
-            return "https://auctions.yahoo.co.jp/search/search?auccat=&tab_ex=commerce&ei=utf-8&aq=-1&oq=&sc_i=&fr=auc_top&p="
-    }
-}
+
 

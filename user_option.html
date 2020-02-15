@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" charset="utf-8">
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/webextension-polyfill/dist/browser-polyfill.js"></script>
+    <script src="user_option.js"></script>
+</head>
+
+<body>
+    <table class="table" id="table_delete">
+        <caption>検索エンジン一覧</caption>
+        <tr>
+            <th>サイト名</th>
+            <th>URL</th>
+            <th>変更を保存</th>
+            <th>項目を削除</th>
+        </tr>
+    </table>
+    <table class="table" id="table_add">
+        <caption>新規追加</caption>
+        <tr>
+            <th>サイト名</th>
+            <th>URL</th>
+            <th>項目を追加</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id=new_display_name class="form-control">
+            </td>
+            <td>
+                <input type="text" id=new_site_url class="form-control">
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" id="button_add">追加</button>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>
