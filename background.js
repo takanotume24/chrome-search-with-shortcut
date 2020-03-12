@@ -18,7 +18,6 @@ chrome.commands.onCommand.addListener(async function (cmd) {
     }
 });
 
-
 chrome.contextMenus.create({
     title: "検索: '%s'",
     contexts: ["all"],

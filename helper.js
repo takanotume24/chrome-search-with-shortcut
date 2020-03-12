@@ -53,14 +53,13 @@ async function get_sites() {
 }
 
 async function set_sites(data) {
-    const result = await browser.storage.sync.set(data)
-    return result
+    return await browser.storage.sync.set(data)
 }
 
 async function delete_key(data, querry) {
     const match_data = data["engines"].filter(function (item, index) {
-        if (item.display_name != querry) return true
-    })
+        if (item.display_name !== querry) return true
+    });
     console.dir(match_data)
     data["engines"] = match_data
     return data

@@ -30,9 +30,7 @@
         "default_popup": "popup.html"
     },
     "permissions": [
-        "tabs",
-        "http://*/*",
-        "https://*/*",
+        "activeTab",
         "contextMenus",
         "storage"
     ],
@@ -49,8 +47,8 @@
             "suggested_key": {
                 "windows": "Ctrl+Shift+S",
                 "mac": "Command+Shift+S",
-                "chromeos": "Ctrl+Shift+U",
-                "linux": "Ctrl+Shift+J"
+                "chromeos": "Ctrl+Shift+S",
+                "linux": "Ctrl+Shift+S"
             }
         },
         "_execute_page_action": {
