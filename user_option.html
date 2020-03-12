@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" charset="utf-8">
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/webextension-polyfill/dist/browser-polyfill.js"></script>
+    <script src="user_option.js"></script>
+</head>
+
+<body>
+    <h2>検索エンジンを追加する<small class="text-muted"></small></h2>
+
+    <ul class="list-group">
+        <li class="list-group-item">1. 追加したいサイトで｢STRING｣と検索します｡</li>
+        <li class="list-group-item">2. その検索結果のURLを｢URL｣の項目に貼り付ます</li>
+        <li class="list-group-item">3. ｢サイト名｣にわかり易い名前をつけます</li>
+        <li class="list-group-item">4. ｢追加｣を押します</li>
+    </ul>
+
+
+    <table class="table" id="table_add">
+        <tr>
+            <th>サイト名</th>
+            <th>URL</th>
+            <th>項目を追加</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id=new_display_name class="form-control">
+            </td>
+            <td>
+                <input type="text" id=new_site_url class="form-control">
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" id="button_add">追加</button>
+            </td>
+
+        </tr>
+    </table>
+
+    <h2>既存の検索エンジンを編集･削除する<small class="text-muted"></small></h2>
+
+    <table class="table" id="table_delete">
+        <tr>
+            <th>サイト名</th>
+            <th>URL</th>
+            <th>変更を保存</th>
+            <th>項目を削除</th>
+        </tr>
+    </table>
+
+
+</body>
+
+</html>
